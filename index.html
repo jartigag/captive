@@ -1,0 +1,95 @@
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>./cautive.sh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/night.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<style type="text/css">
+		body > div > div.slides > section.stack.present > section.present > ul > li{
+			padding: 1.2em 0;
+		}
+  		</style>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2 class="main-title"><a href="#"><i>Fake AP</i></a></h2>
+					<h8>Ejemplo de <i>Rogue Access Point</i><br>en la red Wi-Fi de la UPNA</h8>
+					<p><b>Javier Artiga Garijo y Jaime Goñi Doria</b></p>
+				</section>
+
+				<section>
+					<h2>1</h2>
+					<h4>Crear Access Point con SSID "UPNA"</h4>
+					<p class="fragment" data-fragment-index="1">Los hosts se conectan al AP que perciben como más cercano, <b>sin importar la MAC</b>.<br>Solo se necesita el mismo SSID.</p>
+				</section>
+
+				<section>
+					<h2>2</h2>
+					<h4>Si la red se protege con WPA2,</h4>
+					<p class="fragment" data-fragment-index="1">simplemente copiando la MAC del AP legítimo,<br>los hosts se conectarán al AP falso.</p>
+				</section>
+
+				<section>
+					<h2>3</h2>
+					<h4>Redirigir al Portal Cautivo falso</h4>
+					<p class="fragment" data-fragment-index="1">Con dos reglas de <code>iptables</code>:</p>
+						<pre class="fragment" data-fragment-index="2"><code>
+-A PREROUTING -i wlp2s0 -p tcp -m tcp --dport 80 -j DNAT --to-destination 172.19.0.254:80
+-A POSTROUTING -s 172.19.0.0/24 ! -d 172.19.0.0/24 -j MASQUERADE
+						</code></pre>
+					<p class="fragment" data-fragment-index="2">enrutamos todo el tráfico HTTP a <code>NuestraIP:80</code></p>
+				</section>
+
+				<section>
+					<h2>4</h2>
+					<img src="img/portal.png" style="position: absolute; z-index: -1">
+					<img class="fragment" data-fragment-index="1"  src="img/clay.png" style="position: absolute; z-index: -1">
+					<img class="fragment" data-fragment-index="2" src="img/login1.png" style="position: absolute; z-index: -1; margin-top: 3em; margin-left: 0.5em;">
+					<img class="fragment" data-fragment-index="3" src="img/login2.png" style="position: relative; z-index: -1; margin-top: 3em; margin-left: 0.5em;">
+				</section>
+
+				<section>
+					<h2>5</h2>
+					<h4>¿Y para los sitios web con <a href="https://es.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>?</h4>
+					<p class="fragment" data-fragment-index="1"><code><a href="https://github.com/PentesterES/Delorean">delorean.py</a></code> <i>does the trick</i></p>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
