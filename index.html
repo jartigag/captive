@@ -7,6 +7,8 @@
 
 		<title>./cautive.sh</title>
 
+		<link rel="stylesheet" type="text/css" href="css/asciinema-player.css" />
+
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/night.css">
 		<link rel="stylesheet" href="css/custom.css">
@@ -38,19 +40,19 @@
 					<p><b>Javier Artiga Garijo y Jaime Goñi Doria</b></p>
 				</section>
 
-				<section> <!--section data-background="image.png"-->
+				<section data-background="img/create_new_connection.png">
 					<h2>1</h2>
 					<h4>Crear Access Point con SSID "UPNA"</h4>
 					<p class="fragment" data-fragment-index="1">Los hosts se conectan al AP que perciben como más cercano, <b>sin importar la MAC</b>.<br>Solo se necesita el mismo SSID.</p>
 				</section>
 
-				<section>
+				<section data-background="img/create_new_connection.png">
 					<h2>2</h2>
 					<h4>Si la red se protege con WPA2-PSK,</h4>
 					<p class="fragment" data-fragment-index="1">simplemente copiando la MAC del AP legítimo,<br>los hosts se conectarán al AP falso.</p>
 				</section>
 
-				<section>
+				<section data-background="img/iptables.png">
 					<h2>3</h2>
 					<h4>Redirigir al Portal Cautivo falso</h4>
 					<p class="fragment" data-fragment-index="1">Con dos reglas de <code>iptables</code>:</p>
@@ -61,7 +63,7 @@
 					<p class="fragment" data-fragment-index="2">enrutamos todo el tráfico HTTP a <code>NuestraIP:80</code></p>
 				</section>
 
-				<section>
+				<section data-background="img/clay-bg.png">
 					<section>
 						<h2>4</h2>
 						<img src="img/portal.png" style="position: absolute; z-index: -1">
@@ -76,15 +78,13 @@
 					</section>
 				</section>
 
-				<section>
-					<section>
-						<h2>5</h2>
-						<h4>¿Y para los sitios web con <a href="https://es.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>?</h4>
-						<p class="fragment" data-fragment-index="1"><code><a href="https://github.com/PentesterES/Delorean">delorean.py</a></code> <i>does the trick</i></p>
-					</section>
+				<section data-background="img/delorean.png">
+					<h2>5</h2>
+					<h4>¿Y para los sitios web con <a href="https://es.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>?</h4>
+					<p class="fragment" data-fragment-index="1"><code><a href="https://github.com/PentesterES/Delorean">delorean.py</a></code> <i>does the trick</i></p>
 				</section>
 
-				<section>
+				<section data-background="img/delorean.png">
 					<section>
 						<img src="img/delorean-ntp/chromium-preloaded-hsts-list.png">
 					</section>
@@ -102,6 +102,9 @@
 					</section>
 					<section>
 						<img src="img/delorean-ntp/safari-protected-from-delorean.png">
+					</section>
+					<section>
+						<asciinema-player src="delorean.json" cols="137" rows="24"></asciinema-player>
 					</section>
 					<section>
 						<iframe allowfullscreen width="600" height="494"
@@ -130,6 +133,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/asciinema-player.js"></script>
 
 		<script>
 			// More info about config & dependencies:
