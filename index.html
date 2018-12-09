@@ -8,6 +8,7 @@
 		<title>./cautive.sh</title>
 
 		<link rel="stylesheet" type="text/css" href="css/asciinema-player.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/night.css">
@@ -34,20 +35,20 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
+				<section data-background="img/wifi.png">
 					<h2 class="main-title"><a href="#"><i>Fake AP</i></a></h2>
 					<h8>Ejemplo de <i>Rogue Access Point</i><br>en la red Wi-Fi de la UPNA</h8>
 					<p><b>Javier Artiga Garijo y Jaime Goñi Doria</b></p>
 				</section>
 
 				<section data-background="img/create_new_connection.png">
-					<h2>1</h2>
+					<h2>1<br><i class="fa fa-unlock"></i></h2>
 					<h4>Crear Access Point con SSID "UPNA"</h4>
 					<p class="fragment" data-fragment-index="1">Los hosts se conectan al AP que perciben como más cercano, <b>sin importar la MAC</b>.<br>Solo se necesita el mismo SSID.</p>
 				</section>
 
 				<section data-background="img/create_new_connection.png">
-					<h2>2</h2>
+					<h2>2<br><i class="fa fa-lock"></i></h2>
 					<h4>Si la red se protege con WPA2-PSK,</h4>
 					<p class="fragment" data-fragment-index="1">simplemente copiando la MAC del AP legítimo,<br>los hosts se conectarán al AP falso.</p>
 				</section>
@@ -81,15 +82,17 @@
 				<section data-background="img/delorean.png">
 					<h2>5</h2>
 					<h4>¿Y para los sitios web con <a href="https://es.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>?</h4>
+					<p>Necesitamos evitar la conexión por HTTPS<br>que fuerzan los <a href="https://caniuse.com/#feat=stricttransportsecurity">navegadores</a><sup><a href="https://www.chromium.org/hsts"><i class="fab fa-chrome"></i></a><a href="https://blog.mozilla.org/security/2012/11/01/preloading-hsts/"><i class="fab fa-firefox"></i></a></sup><br> con los sitios de su lista HSTS precargada</p>
 					<p class="fragment" data-fragment-index="1"><code><a href="https://github.com/PentesterES/Delorean">delorean.py</a></code> <i>does the trick</i></p>
 				</section>
 
 				<section data-background="img/delorean.png">
 					<section>
-						<img src="img/delorean-ntp/chromium-preloaded-hsts-list.png">
+						<img src="img/hsts_header.png">
 					</section>
 					<section>
-						<img src="img/delorean-ntp/chromium-preloaded-hsts-list2.png">
+						<img src="img/delorean-ntp/chromium-preloaded-hsts-list.png" style="position: absolute; z-index: -1">
+						<img class="fragment" data-fragment-index="1"  src="img/delorean-ntp/chromium-preloaded-hsts-list2.png" style="position: relative; z-index: -1">
 					</section>
 					<section>
 						<img src="img/delorean-ntp/ntp-ubuntu.png">
@@ -113,7 +116,7 @@
 					</section>
 				</section>
 
-				<section>
+				<section data-background="img/shield.png">
 					<h2>Contramedidas</h2>
 					<br>
 					<ul>
@@ -122,6 +125,8 @@
 						<li class="fragment grow" data-fragment-index="2"><a href="https://en.wikipedia.org/wiki/Wireless_intrusion_prevention_system">WIPS</a> (<i>Wireless Intrusion Prevention System</i>)</li>
 						<br>
 						<li class="fragment grow" data-fragment-index="3"><a href="https://en.wikipedia.org/wiki/Virtual_private_network">VPN</a></li>
+						<br>
+						<li class="fragment grow" data-fragment-index="4">Escribir <b><code>https://</code> siempre</b></li>
 					</ul>
 				</section>
 
